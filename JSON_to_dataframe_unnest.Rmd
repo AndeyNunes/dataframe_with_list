@@ -1,0 +1,65 @@
+---
+title: "list to dataframe"
+author:  "John Little"
+output: html_notebook
+---
+
+
+The following is HTML output for the R Notebook, list_to_dataframe.Rmd and illustrates how to take a list column in a dataframe and wrangle it, thus making it easier to analyze
+
+From a Jenny Bryan Workshop but similar to [Purrr tutorial](https://jennybc.github.io/purrr-tutorial/):  [Food Markets in New York](https://jennybc.github.io/purrr-tutorial/ex26_ny-food-market-json.html) 
+
+## Load Packages
+
+- purrr  -- a package for iterating over lists
+- repurrrsive -- a package for learning purrr
+
+```{r}
+library(purrr)
+library(repurrrsive)
+
+## The following are helpful tidyverse packages.  
+library(tibble)
+library(dplyr)
+library(tidyr)
+```
+
+Could have more simply loaded tidyverse & repurrrsive packages, but we're learning here.
+
+```{}
+library(tidyverse)
+library(repurrrsive)
+```
+
+
+## Assign onboard list *got_chrs* to an list *sw_characters*
+
+```{r}
+sw_characters <- got_chars
+```
+
+## Simplify the list
+
+select list items (*name*, and *titles*) to work on, transform them to a data frame with two variables.  One variable is a character vector, the other variable is a list -- because a single named character can have many alegiances (i.e. titles).
+
+```{r}
+dataframe_list <- tibble(
+  name = map_chr(sw_characters, "name"),
+  title = map(sw_characters, "titles")
+)
+
+dataframe_list
+```
+
+## Transform 
+from nested list, to "unfilled" tall, then filldown (i.e. `unnest()`)
+
+```{r}
+dataframe_list %>% 
+  mutate(n_titles = map_int(title, length)) %>% 
+  filter(n_titles > 1) %>% 
+  select(name, title) %>% 
+  unnest()
+```
+
+
