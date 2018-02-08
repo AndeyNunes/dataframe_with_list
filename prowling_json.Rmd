@@ -1,0 +1,49 @@
+---
+title: "Rough Out Example. Transform JSON"
+output: html_notebook
+---
+
+## Load Libraries
+```{r}
+library(tidyverse)
+library(jsonlite)
+library(repurrrsive)
+```
+
+## Overview
+
+
+Nature of Appointment (briefly):	Importing Scholars@Duke JSON in a loop. For example https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=https://scholars.duke.edu/individual/per5862252
+
+## Fetch JSON from Restful API
+```{r}
+results <- fromJSON("https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=https://scholars.duke.edu/individual/per5862252")
+```
+
+
+```{r}
+map(results$title)
+```
+
+
+```{r}
+(grants <- results$grants)
+```
+
+
+```{r}
+(attribs <- grants$attributes)
+results$grants$attributes
+```
+
+## Checking List & JSON Structures
+
+```{r}
+sw_characters <- got_chars
+```
+
+```{r}
+write_json(sw_characters, "sw.json")
+write_json(results, "sad.json")
+```
+
