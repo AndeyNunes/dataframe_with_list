@@ -1,0 +1,78 @@
+---
+title: "Crawl Directory"
+output: html_notebook
+---
+
+## Pacakges
+
+```{r}
+library(tidyverse)
+```
+
+
+## Org Record 
+
+```{r}
+org_rec <- "https://scholars.duke.edu/widgets/api/v0.9/organizations/people/all.json?uri=https://scholars.duke.edu/individual/org50000498&formatting=detailed&style=yes&start=&end="
+```
+
+
+```{r}
+(org_links <- fromJSON(URLencode(org_rec)))
+```
+
+```{r}
+class(org_links)
+```
+
+```{r}
+glimpse(org_links)
+```
+
+
+```{r}
+glimpse(org_links$attributes)
+```
+
+```{r}
+org_links[1,]$attributes
+```
+
+```{r}
+org_links %>% 
+  group_by(title) %>% 
+  count() %>% 
+  arrange(-n)
+```
+
+```{r}
+org_links %>% 
+  select(-attributes) %>% 
+  #mutate(status = str_replace(vivoType, ".*#", ""))
+  mutate(status = map_chr(str_split(vivoType, "#"), 2)) %>% 
+  group_by(status) %>% 
+  count() %>% 
+  arrange(-n) 
+```
+
+
+```{r}
+org_links %>% 
+  select(-attributes) %>% 
+  mutate(status = map_chr(str_split(vivoType, "#"), 2)) %>% 
+  group_by(status) %>% 
+  count() %>%  
+  ggplot(aes(x = reorder(status, -n), y = n)) +
+  geom_bar(stat = "identity")
+```
+
+```{r}
+org_links %>% 
+  select(-attributes) %>% 
+  mutate(status = map_chr(str_split(vivoType, "#"), 2)) %>% 
+  group_by(status) %>% 
+  count() %>% 
+  ggplot(aes(x = reorder(status, -n), y = n)) +
+  geom_col()
+```
+
