@@ -1,0 +1,218 @@
+---
+title: "More Futzing with JSON lists"
+output: html_notebook
+---
+
+## Load Packages
+```{r}
+library(tidyverse)
+library(jsonlite)
+library(repurrrsive)
+```
+
+## Load Data
+
+https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=https://scholars.duke.edu/individual/per5862252
+
+```{r}
+sad_person <- fromJSON("https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=https://scholars.duke.edu/individual/per5862252")
+```
+
+###  Write out the JSON 
+
+Here I want to alter the punctuation of the JSON file so that I can experiment with the data.  My theory is that the SAD system is generating mal-formed JSON and that adding square brackets to the record will make it easier to manipulate
+
+```{r}
+write_json(sad_person, "sadp.json")
+```
+
+
+Then used Notepad++ to add `[` and `]` to the begining and end, respectively.  (Could have done this inside the RStudio editor.)  Now I want to read in this modified JSON file.
+
+```{r}
+sadp_with_bracket <- read_json("sadp_with_bracket.json",
+                               simplifyVector = TRUE)
+
+foo <- read_json("sadp.json")
+
+write_json(got_chars, "sw_chars.json")
+
+foo <- read_json("sw_chars.json")
+```
+
+### Resulting Discovered Problems
+
+I can write https://jsonformatter.curiousconcept.com/and subsequently read in the sw_chars.json  but I get errors when I try to do the same with the Scholars At Duke json data.  So now I'm going to try some JSON validators
+
+- https://jsonlint.com/
+- https://jsonformatter.curiousconcept.com/
+
+
+Both tools report that the **JSON format is valid**.  So that shoots that theory.
+
+### Wait Wait Wait
+
+I took a closer look at the validated JSON and it looks like the validator did change the JSON punctuation formatting.  Let me try and read that in...
+
+```{r}
+valid_json <- read_json("delinted_validated_data.json")
+```
+
+
+Yeah, that seemed to make a difference.  Notice the difference in reported data structures
+
+sad_person is a `r class(sad_person)`
+
+
+```{r}
+class(got_chars)
+class(sad_person)
+class(valid_json)
+```
+
+Although `class()` reports all three as lists, the Environment tab reports *sad_person* (read in via URL -- `fromJSON`) as a "List of 24".  Whereas, `class()` reports *valid_json* (read in via `read_json`) as a "Large list (24 elements, 578.6 Kb)"
+
+Let's check what would happen if we read in the *repurrrsive::got_char* onboard JSON data....
+
+```{r}
+foo_sw_chars <- read_json("sw_chars.json")
+```
+
+
+```{r}
+View(foo_sw_chars)
+View(valid_json)
+```
+
+O.K.  It seems to make no difference
+
+## Simplify
+
+Now I'm going to look into what happens if I just take the first 5 "rows" of the JSON file.
+
+
+```{r}
+super_small <- read_json("super_small.json")
+```
+
+
+
+## Flatten Test
+
+```{r}
+map(got_chars, "id") %>% 
+  flatten_int()
+```
+
+```{r}
+
+View(got_chars)
+map(got_chars, "id") %>% 
+  flatten_chr()
+  #flatten_int()
+```
+
+
+```{r}
+map(got_chars, "titles") %>% 
+  flatten("titles")
+```
+
+```{r}
+flatten(got_chars)
+```
+
+```{r}
+map(got_chars, "titles") %>% 
+  flatten_chr()
+```
+
+
+```{r}
+sad_person$positions %>% 
+  jsonlite::flatten()
+```
+
+
+```{r}
+sad_person$positions %>% 
+  purrr::flatten()
+
+sad_person %>% 
+  purrr::flatten()
+
+#jsonlite::flatten(super_small)
+```
+
+```{r}
+names(sad_person[[8]])
+names(sad_person[[6]])
+```
+
+```{r}
+sad_person[[6]]
+```
+
+```{r}
+sad_person[["title"]]
+sad_person[["label"]] 
+sad_person[["publications"]]
+```
+
+
+```{r}
+purrr::flatten(sad_person)
+map(sad_person, "uri")
+```
+
+
+```{r}
+map(sad_person, "label")
+```
+
+
+```{r}
+sad_person[[4]]
+```
+
+
+```{r}
+map_chr(sad_person[["label"]], 1)
+map_chr(sad_person[["title"]], 1)
+sad_person[["title"]]
+map_chr(sad_person[["vivoType"]], 1)
+map_chr(sad_person[["uri"]], 1)
+#map(sad_person, 6)
+sad_person[["publications"]] 
+sad_person[["awards"]] 
+sad_person[["awards"]][["attributes"]]
+
+#(award_labels <- map_chr(sad_person[["awards"]]$label, 1))
+as.list(sad_person$awards$label)
+
+```
+
+
+```{}
+## list-columns = lists in a data frame ----
+gt <- tibble(
+  name = map_chr(got_chars, "name"),
+  houses = map(got_chars, "allegiances")
+)
+View(gt)
+```
+
+
+
+
+```{r}
+foo_df <- tibble(
+  name = sad_person$label,
+  title = sad_person$title,
+  #awards = as.list(sad_person$awards$label)
+  awards = map(sad_person$awards$label, 1)
+)
+
+View(foo_df)
+```
+
