@@ -1,0 +1,36 @@
+---
+title: "Damaris Code"
+---
+
+```{r}
+#library("RJSONIO")
+library(jsonlite)
+```
+
+
+```{r}
+#imports the raw JSoN for a person and pull out desired attributes
+rawdata <- fromJSON("https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=0614679")
+
+uri = rawdata[[1]]
+personName = rawdata[[5]]
+affiliation = rawdata[[4]]
+updatedAt = rawdata[[3]]
+attributes = rawdata[[21]]
+imageModTime = attributes[[6]]
+
+uri 
+personName 
+affiliation
+updatedAt 
+imageModTime
+
+df = data.frame(uri, personName, affiliation, updatedAt, imageModTime)
+df
+
+write.csv(df)
+
+#imports raw JSON for an organization and pull out list of person URIs
+personList <- fromJSON ("https://scholars.duke.edu/widgets/api/v0.9/organizations/people/5.json?uri=https://scholars.duke.edu/individual/org50000278&formatting=detailed&style=yes&start=&end=")
+```
+

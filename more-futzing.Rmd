@@ -134,6 +134,8 @@ sad_person$positions %>%
 ```
 
 
+## Pick Up Here
+
 ```{r}
 sad_person$positions %>% 
   purrr::flatten()
