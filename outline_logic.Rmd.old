@@ -32,11 +32,12 @@ Using either a for loop or map, loop over each row of the org_links data frame, 
 
 more_info <- org_links$uri
 
-## Example
+### Example
 
-**The following contains no Logic loops (either "for", or "map")**
+build a URL:
 
-### build a URL:
+https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=org_links$uri[1]
+
 
 ```{r}
 baseurl <- "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri="
@@ -45,20 +46,19 @@ person_link <- glue(baseurl, org_links$uri[1])
 
 ```
 
-### Gather person data
 
 ```{r}
 more_info <- fromJSON(person_link)
 # more_info <- fromJSON(person_link_example1)
 
-# more_info
+more_info
 ```
 
 
 Now, `more_info` is our list.  We can use code exmaples from "more-futzing.Rmd" to figure out how to gather data from an indivual  (See section:  Building a Custom Data Frame)
 
 
-### Create Big Data Frame 
+## Build Data Frame from List
 
 ```{r}
 Big_data_frame <- tibble(
@@ -66,7 +66,7 @@ Big_data_frame <- tibble(
   title = more_info$title,
   #awards = as.list(sad_person$awards$label)
   #awards = map(sad_person$awards$label, 1)
-  NetID = more_info$attributes$netid
+  org_label = more_info$positions$attributes$organizationLabel
 )
 
 # tibble is similar to as.data.frame
@@ -75,7 +75,7 @@ Big_data_frame <- tibble(
 Big_data_frame
 ```
 
-###  Add Next person
+##  Add Next person
 
 ```{r}
 foo_person_uri <- "https://scholars.duke.edu/individual/per5862252"
@@ -86,49 +86,26 @@ person_link <- glue(baseurl, foo_person_uri)
 
 ```{r}
 more_info <- fromJSON(person_link)
-# more_info
-```
-
-### Add Rows to Data Frame
-
-
-```{r}
-Big_data_frame <- add_row(Big_data_frame,
-                          name = more_info$label,
-       title = more_info$title,
-       NetID = more_info$attributes$netid)
-
-Big_data_frame
-
-#rm(Big_data_frame)
-```
-
-### Add Next Person
-
-```{r}
-baseurl <- "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri="
-
-person_link <- glue(baseurl, org_links$uri[2])
-
-```
-
-```{r}
-more_info <- fromJSON(person_link)
 # more_info <- fromJSON(person_link_example1)
+
+more_info
 ```
 
-### Add Rows to Data Frame
+## Add Rows to Data Frame
+
 
 ```{r}
 Big_data_frame <- add_row(Big_data_frame,
                           name = more_info$label,
        title = more_info$title,
-       NetID = more_info$attributes$netid)
+       org_label = more_info$positions$attributes$organizationLabel)
 
 Big_data_frame
 
 #rm(Big_data_frame)
 ```
+
+
 
 
 
