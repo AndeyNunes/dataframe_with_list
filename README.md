@@ -10,3 +10,5 @@ From a Jenny Bryan Workshop but similar to [Purrr tutorial](https://jennybc.gith
 
 - Tidyverse (Intro to R):  https://rfun.library.duke.edu/intro2r
 
+- Looping through dataframe columns using purrr::map()  -- https://sebastiansauer.github.io/looping-purrr/
+
