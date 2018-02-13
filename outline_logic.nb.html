@@ -312,11 +312,11 @@ person_link &lt;- glue(baseurl, foo_person_uri)</code></pre>
 <h3>Add Rows to Data Frame</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQmlnX2RhdGFfZnJhbWUgPC0gYWRkX3JvdyhCaWdfZGF0YV9mcmFtZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZSA9IG1vcmVfaW5mbyRsYWJlbCxcbiAgICAgICB0aXRsZSA9IG1vcmVfaW5mbyR0aXRsZSxcbiAgICAgICBOZXRJRCA9IG1vcmVfaW5mbyRhdHRyaWJ1dGVzJG5ldGlkKVxuQmlnX2RhdGFfZnJhbWVcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQmlnX2RhdGFfZnJhbWUgPC0gYWRkX3JvdyhCaWdfZGF0YV9mcmFtZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZSA9IG1vcmVfaW5mbyRsYWJlbCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgdGl0bGUgPSBtb3JlX2luZm8kdGl0bGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIE5ldElEID0gbW9yZV9pbmZvJGF0dHJpYnV0ZXMkbmV0aWQpXG5CaWdfZGF0YV9mcmFtZVxuYGBgIn0= -->
 <pre class="r"><code>Big_data_frame &lt;- add_row(Big_data_frame,
                           name = more_info$label,
-       title = more_info$title,
-       NetID = more_info$attributes$netid)
+                          title = more_info$title,
+                          NetID = more_info$attributes$netid)
 Big_data_frame</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MywibnJvdyI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJRVS9ESUJTbXBYVlprem1qRjQvOGdLM0pqQmVQVFhZeE1ZdHhpZGtWVzJiUkRoWjRWWS8rOGxab29URndnUGUrOTcyUDk4SEw5bkNYSFRLRVVJeHdFcUVZbXpDSnpSYWhCTTN0K1lNUXZqR0JyVndOeExHd0xDcDYwbEtzeUk1Q1RZV0RyNSs0cUpTRWVrWDJwUVFnUlI0MHp2YlFWa3lBUzI5ZmVjbklzNUpmVWdPUlJ3STFJNFVDSGJTbDRvTnU3bDF5b2EzMkpwZzFMUnVxZlo4SHM0b0N6WStLbmxoSUZ3YnpkT3pBeElLZUFCeWFLZGt4ZU53R0VuTWx2M012czdEVC9wcXQ3L3ZPSEYxQW5za3pjQ2tNTmJZUG1nYURSaW9BbHEydzB0VzZyRnZ4dVg2d1pvYnl1Qll1anYvRmVMd1M5MDRxOWUvRnhEc1hrNVdHdnJIR0paZkd3dUFnUHlzKy9VcG1VSjJEQk9wNVdTa2Jqd3plVVBjSG1UUVljejRDQUFBPSJ9 -->
@@ -326,9 +326,6 @@ Big_data_frame</code></pre>
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3JtKEJpZ19kYXRhX2ZyYW1lKVxuYGBgIn0= -->
-<pre class="r"><code>#rm(Big_data_frame)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -355,11 +352,11 @@ person_link &lt;- glue(baseurl, org_links$uri[2])</code></pre>
 <h3>Add Rows to Data Frame</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQmlnX2RhdGFfZnJhbWUgPC0gYWRkX3JvdyhCaWdfZGF0YV9mcmFtZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZSA9IG1vcmVfaW5mbyRsYWJlbCxcbiAgICAgICB0aXRsZSA9IG1vcmVfaW5mbyR0aXRsZSxcbiAgICAgICBOZXRJRCA9IG1vcmVfaW5mbyRhdHRyaWJ1dGVzJG5ldGlkKVxuQmlnX2RhdGFfZnJhbWVcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQmlnX2RhdGFfZnJhbWUgPC0gYWRkX3JvdyhCaWdfZGF0YV9mcmFtZSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgbmFtZSA9IG1vcmVfaW5mbyRsYWJlbCxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgdGl0bGUgPSBtb3JlX2luZm8kdGl0bGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIE5ldElEID0gbW9yZV9pbmZvJGF0dHJpYnV0ZXMkbmV0aWQpXG5CaWdfZGF0YV9mcmFtZVxuYGBgIn0= -->
 <pre class="r"><code>Big_data_frame &lt;- add_row(Big_data_frame,
                           name = more_info$label,
-       title = more_info$title,
-       NetID = more_info$attributes$netid)
+                          title = more_info$title,
+                          NetID = more_info$attributes$netid)
 Big_data_frame</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MywibnJvdyI6M30sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJPMC9ETUJCMjg2QnFwRUlGQzZNM2xqWlNLeEJ6cWc2QVVJV29oTHFheENXbWlWM1pGeDRiZjV3R083VXJZUS8zK083VGQzZSs1OFY2bHF3VGhGQ0F3cWlIZ2xDSFVhQk5EMFZvWVB3WFF1R0ZEa3hsMVBsRDRTd3JTSzBFSCtNbGdaSndDNTgvTWw1SUFlVVlyM0lCZ0xQVVZiSnFja2RVeVdvMnhvZkFrK3l2b0Nrb0I1dGV2ckNjNGljcFBvUUNMRFlZU29vekNjcldyeDVJVFJXZXAzalJiRHZpaGlvbHBLSE9tY2hMV2pNRjh0dnJFdk4zTXIyMnlZa3lRMDV0RnBYazV0YjdnRGl2aUZKV3c0RkpRWUNrRzZrSDhPbmNET1cxakF6b0NNQ2dPaVpMQ3ZjTFQySWd4V2ZxWklibU5qL2F0RzM3cTkzZUkvZkZEcGpnbWhxWUs4WGVvRDNwQWFPR0crbGlrcGNOMzA2bU03Tk5Weis4b1kzRC83SHBHYlpXSzNhZlIva2I0OGRkS3ZKS0s1dWM2aDI2RmRLZFpNZUxKaHBWS1FnZ2pwZmtvbkpJdHh6YS93RTJMaGFibEFJQUFBPT0ifQ== -->
@@ -369,9 +366,6 @@ Big_data_frame</code></pre>
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3JtKEJpZ19kYXRhX2ZyYW1lKVxuYGBgIn0= -->
-<pre class="r"><code>#rm(Big_data_frame)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
