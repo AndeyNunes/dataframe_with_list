@@ -1,0 +1,61 @@
+---
+title: "Testing our Idea"
+output: html_notebook
+---
+
+## Load Packages
+
+```{r}
+library(jsonlite)
+library(tidyverse)
+```
+
+## Get Scholars @ Directory information
+
+
+```{r}
+org_rec <- "https://scholars.duke.edu/widgets/api/v0.9/organizations/people/all.json?uri=https://scholars.duke.edu/individual/org50000498&formatting=detailed&style=yes&start=&end="
+```
+
+
+```{r}
+(org_links <- fromJSON(URLencode(org_rec)))
+```
+
+
+## Logic Outline
+
+Using either a for loop or map, loop over each row of the org_links data frame, take the uri field and gather more information.
+
+more_info <- org_links$uri
+
+### Example
+
+build a URL:
+
+https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri=org_links$uri[1]
+
+
+```{r}
+baseurl <- "https://scholars.duke.edu/widgets/api/v0.9/people/complete/all.json?uri="
+
+foo_person_uri <- "https://scholars.duke.edu/individual/per5862252"
+
+person_link_example1 <- glue::glue(baseurl, org_links$uri[1])
+
+person_link <- glue::glue(baseurl, foo_person_uri)
+
+```
+
+
+```{r}
+more_info <- fromJSON(person_link)
+#more_info <- fromJSON(person_link_example1)
+
+more_info
+```
+
+
+Now, `more_info` is our list.  We can use code exmaples from "more-futzing.Rmd" to figure out how to gather data from an indivual  (See section:  Building a Custom Data Frame)
+
+

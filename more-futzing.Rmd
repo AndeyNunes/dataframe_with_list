@@ -101,7 +101,7 @@ View(gt)
 ```
 
 
-
+## Building a Custom Data Frame
 
 ```{r}
 person_awards_df <- tibble(
