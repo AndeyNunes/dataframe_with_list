@@ -208,13 +208,23 @@ View(gt)
 
 
 ```{r}
-foo_df <- tibble(
+person_awards_df <- tibble(
   name = sad_person$label,
   title = sad_person$title,
   #awards = as.list(sad_person$awards$label)
-  awards = map(sad_person$awards$label, 1)
+  #awards = map(sad_person$awards$label, 1)
+  awards = sad_person$awards$label
 )
 
-View(foo_df)
+#person_awards_df$awards[3]
+person_awards_df
+```
+
+
+
+```{r}
+map(sad_person$awards, 2)
+
+sad_person$awards$label
 ```
 
