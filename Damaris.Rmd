@@ -31,6 +31,14 @@ df
 write.csv(df)
 
 #imports raw JSON for an organization and pull out list of person URIs
-personList <- fromJSON ("https://scholars.duke.edu/widgets/api/v0.9/organizations/people/5.json?uri=https://scholars.duke.edu/individual/org50000278&formatting=detailed&style=yes&start=&end=")
+personList <- fromJSON("https://scholars.duke.edu/widgets/api/v0.9/organizations/people/5.json?uri=https://scholars.duke.edu/individual/org50000278&formatting=detailed&style=yes&start=&end=")
+```
+
+
+For more information about looping through a data frame column, see:  https://sebastiansauer.github.io/looping-purrr/
+
+```{r}
+class(personList)
+personList
 ```
 

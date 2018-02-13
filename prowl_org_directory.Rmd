@@ -43,7 +43,7 @@ org_links[1,]$attributes
 org_links %>% 
   group_by(title) %>% 
   count() %>% 
-  arrange(-n)
+  arrange(desc(n))
 ```
 
 ```{r}
