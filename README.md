@@ -5,6 +5,13 @@ The following [HTML output](https://johnlittle.info/code_example/JSON_to_datafra
 From a Jenny Bryan Workshop but similar to [Purrr tutorial](https://jennybc.github.io/purrr-tutorial/):  [Food Markets in New York](https://jennybc.github.io/purrr-tutorial/ex26_ny-food-market-json.html) 
 
 
+## Code Examples
+
+look in the following two files for best code examples
+
+- prowl_org_directory.Rmd
+- more-futzing.Rmd
+
 
 ## Other Resources:
 
