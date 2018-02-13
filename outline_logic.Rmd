@@ -95,12 +95,10 @@ more_info <- fromJSON(person_link)
 ```{r}
 Big_data_frame <- add_row(Big_data_frame,
                           name = more_info$label,
-       title = more_info$title,
-       NetID = more_info$attributes$netid)
+                          title = more_info$title,
+                          NetID = more_info$attributes$netid)
 
 Big_data_frame
-
-#rm(Big_data_frame)
 ```
 
 ### Add Next Person
@@ -122,12 +120,10 @@ more_info <- fromJSON(person_link)
 ```{r}
 Big_data_frame <- add_row(Big_data_frame,
                           name = more_info$label,
-       title = more_info$title,
-       NetID = more_info$attributes$netid)
+                          title = more_info$title,
+                          NetID = more_info$attributes$netid)
 
 Big_data_frame
-
-#rm(Big_data_frame)
 ```
 
 
